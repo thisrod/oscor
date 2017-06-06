@@ -3,9 +3,10 @@ function oscor()
 
 parameters
 
+% Comparison values are for the initial state
+
 if exist('coherent')
 	coherent = configure(coherent);
-	keyboard
 	coherent.randoms = 2;
 	coherent.initial = @(w,r) (2*r.c.gamma)^(-1/4) + [1 1i]*w/2;
 	coherent.compare{3} = @(t,in) 1/sqrt(2*in.c.gamma);
