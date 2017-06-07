@@ -9,18 +9,17 @@ if exist('coherent')
 	coherent = configure(coherent);
 	coherent.randoms = 2;
 	coherent.initial = @(w,r) (2*r.c.gamma)^(-1/4) + [1 1i]*w/2;
-	coherent.compare{3} = @(t,in) 1/sqrt(2*in.c.gamma);
+%	coherent.compare{3} = @(t,in) 1/sqrt(2*in.c.gamma);
 	coherent.observe{4} = @(a,r) 2*r.c.gamma*xave(abs(a).^4 - 2*abs(a).^2/r.dv + 1/(2*r.dv^2), r);
-	coherent.compare{4} = @(t,in) 1;
+%	coherent.compare{4} = @(t,in) 1;
 	coherent.file = ['coh' coherent.file];
 	xspde(coherent);
 end
 
 if exist('bogoliubov')
 	bogoliubov = configure(bogoliubov);
-%	bogoliubov.randoms = 2;
 	bogoliubov.initial = @binit;
-	bogoliubov.compare{3} = @(t,in) bdens(t,in,20);
+%	bogoliubov.compare{3} = @(t,in) bdens(t,in,20);
 	bogoliubov.observe{4} = @(a,r) xave(abs(a).^4 - 2*abs(a).^2/r.dv + 1/(2*r.dv^2), r) / bdens(0, r)^2;
 %	bogoliubov.compare{4} = @(t,in) 1;
 	bogoliubov.file = ['bog' bogoliubov.file];
