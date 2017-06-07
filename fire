@@ -1,25 +1,32 @@
 #!/bin/bash
 
+if [ $# -lt 2 ]; then echo "Usage: fire letter queue"; exit; fi
+
+sshfs rpolking@g2.hpc.swin.edu.au: $DESK/gstar
+
+rm -rf "$DESK/gstar/$1"
+mkdir "$DESK/gstar/$1"
+cp oscor.m parameters.m "$DESK/gstar/$1"
+
 awk 'BEGIN {
-queue = ARGV[1];
-"pwd" | getline pwd;
+pwd = "/home/rpolking/" ARGV[1];  queue = ARGV[2];
 "cat ensembles" | getline;
 ppn["gstar"] = 10;
 if (!(queue in ppn)) exit 1;
 procs = ppn[queue];
 printf "#!/bin/sh\n#PBS -q %s\n", queue;
-printf "#PBS -l nodes=1:ppn=%d\n#PBS -l walltime=2:00\n", ppn[queue];
+printf "#PBS -l nodes=1:ppn=%d\n#PBS -l walltime=2:00:00\n", ppn[queue];
 printf "module load matlab/R2015b\ncd %s" \
 	"\nmatlab -r '\''parpool(%d); xpsetup; oscor; quit'\''\n", pwd, ppn[queue];
 jobs = $2*$3;
 print $1, \
 	(int(jobs/procs) == jobs/procs) ? jobs/procs : int(jobs/procs) + 1, \
-	procs > "ensembles"
+	procs > "'"$DESK/gstar/$1/ensembles"'"
 exit
-}' $* > runjob
+}' $* > "$DESK/gstar/$1/runjob"
 
-echo "addpath(genpath('/home/rpolking/xspde_matlab'))" > xpsetup.m
+if [ $? -ne 0 ]; then echo "I haven't heard of the queue $2"; exit; fi
 
-if [ $? -ne 0 ]; then echo "Usage: fire queue"; exit; fi
+echo "addpath(genpath('/home/rpolking/xspde_matlab'))" > "$DESK/gstar/$1/xpsetup.m"
 
-qsub runjob
+ssh rpolking@g2.hpc.swin.edu.au /opt/torque/bin/qsub "$1/runjob"
