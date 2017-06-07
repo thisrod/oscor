@@ -1,0 +1,25 @@
+#!/bin/bash
+
+awk 'BEGIN {
+queue = ARGV[1];
+"pwd" | getline pwd;
+"cat ensembles" | getline;
+ppn["gstar"] = 10;
+if (!(queue in ppn)) exit 1;
+procs = ppn[queue];
+printf "#!/bin/sh\n#PBS -q %s\n", queue;
+printf "#PBS -l nodes=1:ppn=%d\n#PBS -l walltime=2:00\n", ppn[queue];
+printf "module load matlab/R2015b\ncd %s" \
+	"\nmatlab -r '\''parpool(%d); xpsetup; oscor; quit'\''\n", pwd, ppn[queue];
+jobs = $2*$3;
+print $1, \
+	(int(jobs/procs) == jobs/procs) ? jobs/procs : int(jobs/procs) + 1, \
+	procs > "ensembles"
+exit
+}' $* > runjob
+
+echo "addpath(genpath('/home/rpolking/xspde_matlab'))" > xpsetup.m
+
+if [ $? -ne 0 ]; then echo "Usage: fire queue"; exit; fi
+
+qsub runjob
