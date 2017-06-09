@@ -1,7 +1,7 @@
 function oscor()
 % 1D coherence oscillations from a coherent and bogoliubov initial state
 
-parameters
+parameters, ensembles
 
 % Comparison values are for the initial state
 
@@ -13,7 +13,7 @@ if exist('coherent')
 	coherent.observe{4} = @(a,r) 2*r.c.gamma*xave(abs(a).^4 - 2*abs(a).^2/r.dv + 1/(2*r.dv^2), r);
 %	coherent.compare{4} = @(t,in) 1;
 	coherent.file = ['coh' coherent.file];
-	xspde(coherent);
+	xsim(coherent);
 end
 
 if exist('bogoliubov')
@@ -23,7 +23,7 @@ if exist('bogoliubov')
 	bogoliubov.observe{4} = @(a,r) xave(abs(a).^4 - 2*abs(a).^2/r.dv + 1/(2*r.dv^2), r) / bdens(0, r)^2;
 %	bogoliubov.compare{4} = @(t,in) 1;
 	bogoliubov.file = ['bog' bogoliubov.file];
-	xspde(bogoliubov);
+	xsim(bogoliubov);
 end
 
 end
@@ -34,10 +34,9 @@ function in = configure(in)
 	in.ranges(2) = L*(R-1)/R;  % allow for extra step of circular grid
 	in.linear = @(r) 1i*r.Dx.^2;
 	in.da = @(a,w,r) -1i*(sqrt(2*in.c.gamma)*abs(a).^2 - 1).*a;
-	in.ensembles = load('ensembles');
 	in.file = sprintf('_%04d_%03d.mat', ...
 		round(-100*log10(in.c.gamma)), ...
-		round(10*(in.ranges(1))));
+		round(10*(in.ranges(2))));
 	
 	in.olabels = { ...
 		'Re \psi' ...
