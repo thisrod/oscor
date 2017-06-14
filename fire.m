@@ -3,6 +3,7 @@ function fire(letter, queue)
 
 switch queue
 	case 'gstar', cpus = 10;
+	case 'sstar', cpus = 14;
 	otherwise error 'Unknown job queue'
 end
 
