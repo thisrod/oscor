@@ -50,7 +50,7 @@ fprintf(runfile, '#!/bin/sh\n#PBS -q %s\n', queue);
 fprintf(runfile, '#PBS -l nodes=1:ppn=%d\n#PBS -l walltime=%d:00:00\n', cpus, ceil(work/1e9));
 fprintf(runfile, ['module load matlab/R2015b\ncd %s\n' ...
 	'matlab -r ''parpool(%d); xpsetup; oscor; quit''\n'], ...
-	['~/Desktop/gstar/' letter], cpus);
+	['~/' letter], cpus);
 fclose(runfile);
 
 system(sprintf('ssh rpolking@g2.hpc.swin.edu.au /opt/torque/bin/qsub %s/runjob', letter));
