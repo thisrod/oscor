@@ -1,40 +1,61 @@
-function fire(letter, queue)
-% FIRE  start oscor running on g2
+function fire(command, letter, queue)
+% FIRE  start an XSPDE batch job on Green II
 %
-%    FIRE(COMMAND, NAME, QUEUE) copies files from the current directory to
-%    ~/NAME on the Green II cluster, then runs the Matlab script or
+%    FIRE(COMMAND, NAME, QUEUE) copies files from the current directory
+%    to ~/NAME on the Green II cluster, then runs the Matlab script or
 %    function COMMAND in that directory, using the specified QUEUE.
 %    
-%    This requires that ssh configured to login without any interaction.
-%    Your cluster login is defined in a file parameters.m, which you will
-%    need to edit. You will also need to edit a few other parameters,
-%    including the names of the files to copy to the cluster.
+%    You must have ssh configured to login to gstar without prompting
+%    for a password.
 %    
-%    This is intended for use with XSPDE jobs, and it has some features to
-%    assist with running them in parallel. The files parameters.m and
-%    ensembles.m have a special meaning.
+%    There must be a script called parameters.m in the current directory.
+%    This needs to assign the following Matlab variables:
 %    
-%    The script parameters.m should define a set of XSPDE input structures,
-%    or at least the points, steps and ensembles fields of those
-%    structures. (You can set up the structures elsewhere, then run
-%    parameters to assign these fields.) It should also list the names of
-%    these structures in a cell array called fire_inputs.
+%    gstar_login = your username on Green II 
 %    
-%    One of the parameters defined is hours_per_step. Run a small job to
-%    start, then set this in parameters.m, so that fire will automatically
+%    fire_files = a cell array of filenames to copy to Green II
+%    
+%    fire_inputs = a cell array with the names of XSPDE input structures
+%    defined in parameters.m
+%    
+%    hours_per_step = wall time to request per gridpoint step, as described
+%    below
+%    
+%    This is intended for use with XSPDE jobs, and it has some features
+%    to assist with running them in parallel.
+%    
+%    The parameters.m script should define the XSPDE input structures
+%    that the job will solve, or at least the points, steps and ensembles
+%    fields of those structures.  The script COMMAND can set up the rest
+%    of those structures, then run parameters to assign these fields.
+%    
+%    FIRE generates a script ensembles.m, which the script parameters.m
+%    should run as its final step.  This assigns values to the ensembles
+%    fields of the structures listed in fire_inputs, which have appropriate
+%    parallelism for QUEUE.  The total number of trajectories sampled
+%    is kept constant, except that the generated value for ensembles(2)
+%    is rounded up to an integer.  You should have a stub version of
+%    ensembles.m to run on your desktop machine: an empty file will do.
+%    
+%    FIRE also generates a batch script called runjob, and calls qsub
+%    to run it, and also The job control script will request parallel
+%    Matlab resources consistent with the ensembles it generates.
+%    
+%    One of the parameters defined is hours_per_step. Run a small job
+%    to start, then set this in parameters.m, so that fire will automatically
 %    request an appropriate wall time.
 %    
-%    The fire script generates a batch script, and also a script
-%    ensembles.m. The latter assigns ensembles fields to the input
-%    structures in fire_inputs, so that each input structure has the same
-%    number of trajectories as requested, but with parallelism appropriate
-%    to QUEUE. Your parameters.m script should run this as its last step.
-%    The idea is to write parameters.m to run on your desktop machine, and
-%    let the generated ensembles script reconfigure it for the cluster. The
-%    job control script will request parallel Matlab resources consistent
-%    with the ensembles it generates.
-
-
+%    The latter assigns ensembles fields to the input structures in
+%    fire_inputs, so that each input structure has the same number of
+%    trajectories as requested, but with parallelism appropriate to
+%    QUEUE. Your parameters.m script should run this as its last step.
+%    The idea is to write parameters.m to run on your desktop machine,
+%    and let the generated ensembles script reconfigure it for the
+%    cluster.
+%
+%    Describe rounding up of wall time and ensembles
+%
+%    xpsetup_gstar.m gets copied to xpsetup.m so that you can have a desktop version in the same directory.
 
 switch queue
 	case 'gstar', cpus = 10;
@@ -43,53 +64,54 @@ switch queue
 end
 
 parameters
+ssh_cmd = sprintf('ssh %s@g2.hpc.swin.edu.au ', gstar_login);
 
-if system(['mount | grep' ...
-	' "rpolking@g2\.hpc\.swin\.edu\.au.*/Users/rpolkinghorne/Desktop/gstar" ' ...
-	'> /dev/null']) ~= 0
-	system 'sshfs rpolking@g2.hpc.swin.edu.au: ~/Desktop/gstar'
-end
-
-if ismember(exist(['~/Desktop/gstar/' letter]), [2 7])
-	error 'Target directory already exits'
+[status,~] = system([ssh_cmd 'ls -d ' letter]);
+if status == 0
+	error('Target directory %s already exits', letter)
 else
-	mkdir(['~/Desktop/gstar/' letter])
+	system([ssh_cmd 'mkdir -p ' letter]);
 end
 
-copyfile('oscor.m', ['~/Desktop/gstar/' letter]);
-copyfile('parameters.m', ['~/Desktop/gstar/' letter]);
-xpfile = fopen(['~/Desktop/gstar/' letter '/xpsetup.m'], 'w');
-fprintf(xpfile, 'addpath(genpath(''/home/rpolking/xspde_matlab''))\n');
-fclose(xpfile);
+fire_files = [fire_files 'parameters.m'];
+system(sprintf('scp -q %s %s@g2.hpc.swin.edu.au:%s', ...
+		sprintf('%s ', fire_files{:}), gstar_login, letter));
+if exist('xpsetup_gstar.m')
+	system(sprintf('scp -q xpsetup_gstar.m %s@g2.hpc.swin.edu.au:%s/xpsetup.m', ...
+		gstar_login, letter));
+end
 
-ensfile = fopen(['~/Desktop/gstar/' letter '/ensembles.m'], 'w');
 work = 0;
-if exist('coherent')
-	jobs = prod(coherent.ensembles(2:3));
+efilename = tempname;
+ensfile = fopen(efilename, 'w');
+for istruc = fire_inputs
+	istruc = istruc{:};
+	if exist(istruc)
+		input = eval(istruc);
+	end
+	jobs = prod(input.ensembles(2:3));
 	runs = ceil(jobs/cpus);
-	fprintf(ensfile, 'coherent.ensembles = [%d %d %d];\n', ...
-		coherent.ensembles(1), runs, cpus);
-	work = work + runs*coherent.ensembles(1)*prod(coherent.points)*coherent.steps;
-end
-if exist('bogoliubov')
-	jobs = prod(bogoliubov.ensembles(2:3));
-	runs = ceil(jobs/cpus);
-	fprintf(ensfile, 'bogoliubov.ensembles = [%d %d %d];\n', ...
-		bogoliubov.ensembles(1), runs, cpus);
-	work = work + runs*bogoliubov.ensembles(1)*prod(bogoliubov.points)*bogoliubov.steps;
+	fprintf(ensfile, '%s.ensembles = [%d %d %d];\n', ...
+		istruc, input.ensembles(1), runs, cpus);
+	work = work + runs*input.ensembles(1)*prod(input.points)*input.steps;
 end
 fclose(ensfile);
+system(sprintf('scp -q %s %s@g2.hpc.swin.edu.au:%s/ensembles.m', ...
+	efilename, gstar_login, letter));
 
-runfile = fopen(['~/Desktop/gstar/' letter '/runjob'], 'w');
+runfilename = tempname;
+runfile = fopen(runfilename, 'w');
 fprintf(runfile, '#!/bin/sh\n#PBS -q %s\n', queue);
 fprintf(runfile, '#PBS -l nodes=1:ppn=%d\n', cpus);
 fprintf(runfile, '#PBS -l walltime=%d:00:00\n#PBS -N %s\n', ceil(2*work/1e9), letter);
 fprintf(runfile, ['module load matlab/R2015b\ncd %s\n' ...
 	'echo "Working directory: %s"\n' ...
-	'matlab -r ''parpool(%d); xpsetup; oscor; quit''\n'], ...
-	['~/' letter], letter, cpus);
+	'matlab -r ''parpool(%d); xpsetup; %s; quit''\n'], ...
+	['~/' letter], letter, cpus, command);
 fclose(runfile);
+system(sprintf('scp -q %s %s@g2.hpc.swin.edu.au:%s/runjob', ...
+	runfilename, gstar_login, letter));
 
-system(sprintf('ssh rpolking@g2.hpc.swin.edu.au /opt/torque/bin/qsub %s/runjob', letter));
+system(sprintf('%s /opt/torque/bin/qsub %s/runjob', ssh_cmd, letter));
 
 end
