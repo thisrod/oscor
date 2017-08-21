@@ -1,0 +1,542 @@
+%% LyX 2.2.2 created this file.  For more info, see http://www.lyx.org/.
+%% Do not edit unless you really know what you are doing.
+\documentclass[aps,pra,graphicx]{revtex4-1}
+\setcounter{secnumdepth}{3}
+\usepackage{amsmath}
+\usepackage{graphicx}
+
+\makeatletter
+
+%%%%%%%%%%%%%%%%%%%%%%%%%%%%%% LyX specific LaTeX commands.
+%% Because html converters don't know tabularnewline
+\providecommand{\tabularnewline}{\\}
+
+%%%%%%%%%%%%%%%%%%%%%%%%%%%%%% User specified LaTeX commands.
+%% ****** Start of file aiptemplate.tex ****** %
+%%
+%%   This file is part of the files in the distribution of AIP substyles for REVTeX4.
+%%   Version 4.1 of 9 October 2009.
+%%
+%
+% This is a template for producing documents for use with 
+% the REVTEX 4.1 document class and the AIP substyles.
+% 
+% Copy this file to another name and then work on that file.
+% That way, you always have this original template file to use.
+
+%\documentclass[aip,reprint]{revtex4-1}
+
+\makeatother
+
+\begin{document}
+
+\title{Fluctuating coherence in approximate ground states of a tightly confined
+Bose gas}
+
+\author{Rodney E. S. Polkinghorne}
+\email[]{rpolkinghorne@swin.edu.au}
+
+\selectlanguage{english}%
+
+\author{Bogdan Opanchuk}
+\email[]{bopanchuk@swin.edu.au}
+
+\selectlanguage{english}%
+
+\author{Peter D. Drummond}
+\email[]{pdrummond@swin.edu.au}
+
+\selectlanguage{english}%
+
+\affiliation{Centre for Quantum and Optical Science, Swinburne University of Technology}
+
+\date{\today}
+\begin{abstract}
+It is often supposed that the ground state of a tightly confined Bose
+gas is a coherent state. This is true in the limit of very tight confinement,
+where the extent of the ground state is small compared to the healing
+length of the gas. However, there is an intermediate regime, where
+the extent of the gas is comparable to its healing length. In this
+regime, the positions of the bosons are correlated. In an Bogoliubov
+approximation, only a few sound wave modes have states significantly
+different from coherent states; this would cause a gas in a coherent
+state to undergo oscillations in its coherence function.
+\end{abstract}
+\maketitle
+
+\section{Introduction}
+
+When Bose-Einstein condensates were made in dilute gasses \cite{sci-269-198,prl-75-3969},
+the phenomenon that attracted early interest was the interference
+arising from the global order parameter of this phase \textbf{\cite{sci-275-637}}.
+There is a limited amount to be said about interference in a totally
+coherent field, and attention shifted to other aspects of BECs. More
+recently, it has become possible to form the gasses into very elongated
+clouds \cite{prl-79-549}, where the atomic field is effectively a
+plane or a line. The density of states in these low-dimensional geometries
+differs from that in three dimensions, with the consequence that a
+condensate with a global order parameter does not exist in a one-dimensional
+Bose gas at any finite temperature \cite{prl-85-3745}. This raised
+a new set of questions about spatial coherence in these systems, which
+interference experiments are the obvious means to answer. Such experiments
+have been underway in several laboratories for some years \cite{nap-1-57,nat-462-74}.
+
+As well as the experiments, theoretical studies have explored the
+spatial coherence of the Bose gas in one-dimension.
+
+\textbf{What problem are we solving, and why it matters.}
+
+\section{The interacting Bose gas and its ground state}
+
+In SI units, the second quantised Hamiltonian of an interacting but
+untrapped Bose gas is
+
+\begin{equation}
+\hat{H}_{\text{SI}}=\frac{\hbar^{2}}{2m}\int\hat{\psi}{}^{\dagger}(x)\left(-\nabla^{2}-\xi^{-2}\right)\hat{\psi}(x)+4\pi a\left(\hat{\psi}^{\dagger}(x)\right)^{2}\hat{\psi}^{2}(x)\,dx.\label{eq:i}
+\end{equation}
+The bosons are identical particles of mass $m$, annihilated by the
+field operator $\hat{\psi}(x)$, interacting by a contact potential
+with scattering length $a$. To simplify some calculations that follow,
+they have a uniform potential energy proportional to $-\xi^{-2}$,
+which can be adjusted to set the chemical potential of the ground
+state to zero. In the scaled units used in this paper, with $\hbar^{2}=2m$,
+the Hamiltonian reduces to
+\begin{equation}
+\hat{H}=\int\hat{\psi}{}^{\dagger}(x)\left(-\nabla^{2}-\xi^{-2}\right)\hat{\psi}(x)+4\pi a\left(\hat{\psi}^{\dagger}(x)\right)^{2}\hat{\psi}^{2}(x)\,dx.\label{eq:vi}
+\end{equation}
+
+It is well known that a Bose gas condenses below a critical temperature,
+a phase transition for which the field of the bosons occupying the
+condensate orbital is an order parameter. The state of these condensed
+bosons is often taken to be a coherent state $\left|\psi(x)\right\rangle $,
+in which case the coherent amplitude $\psi(x)$ is an order parameter.
+If a variational ansatz is imposed, under which the state of the Bose
+field remains coherent, this order parameter has a variational solution
+$\psi(x)$ such that $\left|\psi(x)\right\rangle $ satisfies $i\hbar\frac{d}{dt}\left|\psi(x)\right\rangle =\hat{H}_{\text{SI}}\left|\psi(x)\right\rangle $
+in the Dirac-Frenkel sense. This solution satisfies the Gross-Pitaevskii
+equation,
+\begin{equation}
+i\frac{\partial\psi}{\partial t}=\left(-\nabla^{2}-\xi^{-2}+8\pi a\left|\psi\right|^{2}\right)\psi,\label{eq:vii}
+\end{equation}
+so the assumption of a coherent state reduces the quantum Bose field
+to a classical field, the order parameter.
+
+The quantity $\xi=\left(8\pi a\left|\psi\right|^{2}\right)^{-1/2}$
+is called the healing length. This paper will consider uniform systems,
+in which the healing length is constant, and the constant $\xi$ in
+Equation \ref{eq:vi} will always be set equal to it. In the classical
+field theory of the order parameter, the healing length is the only
+physically meaningful property of the gas itself. It is the scale
+over which the order parameter drops to zero where the gas is confined
+at a hard edge; this is the shortest scale on which features can occur
+in the order parameter.
+
+Suppose that the gas is tightly confined along the $z$-axis, and
+has a field operator of the form $\hat{\psi}(x,y,z)=\theta(x,y)\hat{\psi}(z)$.
+\begin{equation}
+H=\int\hat{\psi}{}^{\dagger}(x)\left(-\partial_{z}^{2}-\xi^{-2}\right)\hat{\psi}(x)+\frac{4\pi a}{A}\left(\hat{\psi}^{\dagger}(x)\right)^{2}\hat{\psi}^{2}(x)\,dx,\label{eq:v}
+\end{equation}
+where $A=1/\int\left|\theta\right|^{4}$ is effectively the area of
+the transverse orbital $\theta$. In the case of a uniform density
+$n$, the repulsion coefficient is $4\pi a/A=n\gamma,$ where the
+Lieb-Liniger parameter $\gamma$ measures how far the gas lies from
+the coherent limit that describes non-interacting bosons such as photons.
+This paper uses as its length unit the healing length $\xi=1/\sqrt{2\gamma}n$,
+the classical boundary between long distances on which the density
+of the gas can vary, and short ones on which the gas is made uniform
+by repulsion. In these units, the Hamiltonian becomes
+
+\begin{equation}
+H=\int\hat{\psi}{}^{\dagger}(x)\left(-\partial_{z}^{2}-1\right)\hat{\psi}(x)+\sqrt{\frac{\gamma}{2}}\left(\hat{\psi}^{\dagger}(x)\right)^{2}\hat{\psi}^{2}(x)\,dx,\label{eq:ii}
+\end{equation}
+and the boson density is $\left\langle \hat{\psi}{}^{\dagger}(x)\hat{\psi}(x)\right\rangle =\xi n=1/\sqrt{2\gamma}$.
+
+The ground state of this system was found by Lieb and Liniger \cite{prx-130-1605}.
+It has a fairly simple form in first quantisation: the many-particle
+wave function is composed from pieces of free-particle wave functions,
+with appropriate boundary conditions on the planes where two of the
+particles coincide. This form is very complicated in second quantisation,
+so some approximations are often used. These are described in Section
+\ref{sec:Coherent}.
+
+To date, many experiments have studied the density of a Bose gas,
+but few have studied higher order coherence functions. These gases
+are observed by taking photographs, and the density is the observable
+that this naturally measures. More recently, one-dimensional BEC interferometers
+have become available \cite{nap-1-57,nat-462-74}, which allow higher
+order coherence function to be measured. This paper will focus on
+the second order coherence function 
+\begin{equation}
+g^{2}(x)=\frac{\left\langle \hat{\psi}^{\dagger}(x')\hat{\psi}^{\dagger}(x'+x)\hat{\psi}(x'+x)\hat{\psi}(x')\right\rangle }{\left\langle \hat{\psi}^{\dagger}(x')\hat{\psi}(x')\right\rangle \left\langle \hat{\psi}^{\dagger}(x'+x)\hat{\psi}(x'+x)\right\rangle }\label{eq:iv}
+\end{equation}
+that was introduced by Glauber \cite{prx-130-2529}. This is independent
+of $x'$ in the usual case of a gas that is uniform along the long
+axis of the trap. Note that, according to Equation \ref{eq:ii}, $g^{(2)}(0)=\sqrt{2/\gamma}\left\langle V\right\rangle $,
+where $V$ is the density of repulsion energy.
+
+\section{Coherent and Bogoliubov approximations\label{sec:Coherent}}
+
+In the regime of low interactions, where there are many atoms per
+healing length and $\gamma$ is small, the second term in Equation
+\ref{eq:ii} is much smaller than the first term. In this limit, it
+makes sense to approximate the ground state of the interacting gas
+with that of a gas of free bosons. This can taken to be a multimode
+coherent state $\left|\psi_{0}\right\rangle $, an eigenstate of the
+field annihilation operator such that $\hat{\psi}(x)\left|\psi_{0}\right\rangle =\psi_{0}(x)\left|\psi_{0}\right\rangle $
+\cite{prx-131-2766}. The wave function $\psi_{0}$ is an order parameter
+for the boson field. In general, this satisfies a Gross-Pitaevskii
+equation \textbf{citation}, but in a uniform gas it is constant with
+$\psi_{0}(x)=\sqrt{n}$.
+
+There are some objections in principle to a coherent ground state.
+The major one is that it superposes states with different numbers
+of particles, and that the ground state should actually be a state
+with fixed total number of the form $\left|N\right\rangle =\left(\int\psi_{0}(x)\hat{\psi}^{\dagger}(x)\,dx\right)^{N}\left|0\right\rangle $
+\textbf{citation}. However, it is here being considered as an approximation,
+and there are reasons to think that observable properties predicted
+by it will agree with those seen in experiments. These are based in
+the fact that certain mixtures of number states are identical to certain
+mixtures of coherent states. Precisely, when $P(N)$ is a Poisson
+distribution, with mean $\bar{N}=\int\left|\psi_{0}\right|^{2}$,
+then
+\begin{equation}
+\sum_{n=0}^{\infty}P(N)\left|N\right\rangle \left\langle N\right|=\text{\ensuremath{\frac{1}{2\pi}}}\int_{0}^{2\pi}\left|e^{i\phi}\psi_{0}\right\rangle \left\langle e^{i\phi}\psi_{0}\right|\,d\phi.\label{eq:iii}
+\end{equation}
+On the one hand, the global phase $\phi$ is not observable, and the
+value of any observable in this mixed state is the same as in the
+coherent state $\left|\psi_{0}\right\rangle $ . On the other hand,
+provided that the number of particles in the gas is large, the value
+of an observable in the number state $\left|\bar{N}\right\rangle $
+should be very close to its average over the Poission distribution
+$P(N)$. So observables will take the same expectation values in the
+coherent state and in the number state. This is especially true for
+observables that can be measured repeatably in experiments, because
+the number of particles in a condensed gas can typically not be reproduced
+with better than a Poisson distribution \textbf{citation}. There are
+exceptions. For instance, in some of the experiments currently being
+done by Greiner, the parity of the total number of particles in the
+gas is measured. A coherent state would not be an adequate approximation
+when measurements such as these are being contemplated, but it is
+usually obvious how to modify it.
+
+\textbf{That argument is valid for a coherent state, but it is equally
+valid for any other state with small number variance. Presumably we
+use coherent states instead of squeezed or cat states because they
+are simpler.}
+
+In the regime where $\gamma$ is less than 1, but not much less, the
+approximation of a coherent ground state can be extended in a way
+due to Bogoliubov \textbf{citation}. The atomic field is assumed to
+have the form $\hat{\psi}(x)=\psi_{0}(x)+\hat{\delta\psi}(x)$, where
+the operator $\hat{\delta\psi}$ is small compared to the order parameter
+$\psi_{0}$. The Hamiltonian of Equation \ref{eq:ii} is expanded
+as a binomial in $\psi_{0}$ and $\hat{\delta\psi}$, and the terms
+of third and forth order in $\hat{\delta\psi}$ are dropped. For a
+uniform gas, this results in a Hamiltonian
+\[
+H_{B}=\text{const.}+\sum_{n}\kappa_{n}\sqrt{\kappa_{n}^{2}+2}\left(a_{n}^{\dagger}a_{n}+b_{n}^{\dagger}b_{n}\right),
+\]
+where $\kappa_{n}=k_{n}\xi=2\pi n\xi/L$ is the scaled wave number
+of a quasiparticle, and the quasiparticle operators $a_{n}$and $b_{n}$
+form a squeezed expansion of the boson field, as
+\[
+\delta\hat{\psi}(x)=\sqrt{\frac{2\xi}{L}}\sum_{n=1}^{\infty}\left(\left(u_{n}^{*}a_{n}-v_{n}a_{n}^{\dagger}\right)\sin(\kappa_{n}x)+\left(u_{n}^{*}b_{n}-v_{n}b_{n}^{\dagger}\right)\cos(\kappa_{n}x)\right).
+\]
+
+The frequency of the quasiparticle mode with wavelength $\kappa_{n}$
+is $\omega_{n}=\kappa_{n}\sqrt{\kappa_{n}^{2}+2}$. In the limit of
+short wavelength with $k\gg\xi$, this asymtotes to a quadratic dispersion
+relation $\omega\approx1+\kappa^{2}$, and the quasiparticle energy
+is just the chemical potential plus the kinetic energy of an atom
+with the same wavelength. In the long wavelength limit, with $k\ll\xi$,
+the dispersion relation becomes linear, with $\omega_{n}\approx\sqrt{2}\kappa_{n}$.
+Long wavelength excitations act like sound waves, and in the units
+used here, the Bogoliubov speed of sound is $\sqrt{2}$.
+
+\includegraphics{/Users/rpolkinghorne/Desktop/thesis/figures/uv-1}
+
+\section{Dynamics of a coherent initial state}
+
+Suppose that a Bose gas is prepared in a coherent state. One orbital
+is special, because it has the same form as the order parameter. The
+state of this orbital is coherent, with nonzero amplitude; it does
+not correspond to any mode in the Bogoliubov description. The state
+of the noncondensate orbitals is illustrated in Figure \ref{fig:i}(a).
+On the left hand side, at $t=0$, the atomic orbital is not occupied,
+and its state is a vacuum. The corresponding sound wave must be in
+a squeezed vacuum state. The dynamics are shown in the figure. As
+the state of the orbital alternates between a vacuum and a squeezed
+vacuum, its occupation oscillates sinusoidally. Figure \ref{fig:i}(b)
+shows that this is the case in the simulations. The Fourier components
+of the orbital occupations are plotted, and they form a sharp Bogoliubov
+dispersion curve. (In the wrong units for this paper, which Rodney
+will fix after he plots the figures he needs for his thesis.)
+
+The orbitals are kinetic energy eigenstates, so the kinetic energy
+of the gas is simply the sum of their energies weighted by occupation.
+Figure \ref{fig:i}(c) shows the terms in this sum. The kinetic energy
+will be the sum of a small number of discrete sinusoidal functions.
+
+Physically, the sum of the kinetic energy and the potential energy
+is conserved. However, as noted above, the potential energy is proportional
+to $g^{(2)}(0)$. Therefore, to conserve energy, the coherence function
+must oscillate in the opposite sense to the kinetic energy. In particular,
+it will have the same frequency components.
+
+\begin{figure}
+
+\caption{The vacuum state of an atomic orbital is a squeezed vacuum state of
+the corresponding Bogoliubov sound wave mode. Under the Bogoliubov
+hamiltonian, the sound wave amplitude merely rotates in phase space.
+The equivalent atomic field periodically squeezes and returns to a
+vacuum state, so the number of atoms occupying the orbital oscillates
+at the sound wave frequency. The numerical results are for a truncated
+Wigner simulation with parameters $\gamma=0.1$, axis length 10.\label{fig:i}}
+\includegraphics{cobo-1}\includegraphics{resp080817a}
+\end{figure}
+
+
+\section{Oscillating corellations}
+
+One test of whether a system is in its ground state is that the ground
+state is stationary. This provides a way to investigate how close
+the coherent and Bogoliubov states are to the actual ground state
+of a Bose gas. If the dynamics of a gas can be computed, when it has
+one of these as its initial state, then the observables should have
+constant values for the actual ground state, but their values are
+likely to vary with time for other states.
+
+The most obvious observable is the density of gas. However, this is
+not likely to vary in any reasonable approximation to the ground state.
+All of these states are derived from an equilibrium order parameter
+that satisfies the Gross-Pitaevskii equation with minimum energy.
+Any state that approximates the ground state will lack enough kinetic
+energy to supply the repulsion energy required for the density to
+change very much from this equilibrium value.
+
+On the other hand, the correlation and coherence 
+
+A coherent state in the Bogoliubov approximation, squeezing, rotation,
+large and tight limits, oscillations in the intermediate regime.
+
+In the short length limit, the gas becomes a single mode Bose gas,
+and its dynamics are equivalent to a quartic oscillator with Hamiltonian
+$H=\text{constant}\times\left(a^{\dagger}\right)^{2}a^{2}$. A coherent
+state is not an eigenstate of this Hamiltonian, and, given an initially
+coherent state, the coherence functions will not factorise. In particular,
+$\left\langle a\right\rangle $ decays to zero over time, but the
+Hamiltonian conserves the atom number $\left\langle a^{\dagger}a\right\rangle $.
+However, a coherent initial state does remain coherent to second order,
+with $g^{2}(0)=1$. The Bogoliubov approximation fails in this limit:
+the approximate ground state is a coherent state.
+
+\section{The single orbital limit}
+
+In a very tight trap, there is not enough kinetic energy to get bosons
+out of their ground orbital. Therefore the field reduces to a quartic
+oscillator, \textbf{under the following approximations.}
+
+It is interesting to note that the second order coherence $g^{2}$
+is conserved in a quartic oscillator.
+
+\textbf{How does the Lieb-Liniger ground state reduce to a number
+state in this limit?}
+
+In this limit, where $k\xi\gg1$ for every orbital, the non-condensate
+orbitals of the Bogoliubov state reduce to vacuum states.
+
+\section{The truncated Wigner approximation}
+
+Although the Bogoliubov ground state is only an approximate eigenstate
+of the atomic field hamiltonian, it is an exact eigenstate of the
+second-order approximation to the hamiltonian that formed the basis
+for the discussion in the last section. In order to investigate how
+stationary the Bogoliubov state is under the exact hamiltonian, it
+is necessary to solve for the dynamics governed by that hamiltonian.
+It is not practical to do so exactly, as with almost all problems
+in quantum field dynamics, but it is possible to solve for the dynamics
+using approximations that are independent of the Bogoliubov approximation.
+
+The simplest way to do this is the truncated Wigner method \cite{jcp-65-1289,epl-21-279,pra-58-4824}.
+This method represents the quantum state of a system as a field over
+the classical phase space of that system, by means of the Wigner transform
+\cite{prx-40-749}. The field is treated as a probability density
+for classical states, which evolves according to the classical Hamiltonian;
+then the Weyl transform converts the time-evolving field back to a
+density operator, which is treated as the time-dependent state of
+the system. There are arguments that the classical dynamics should
+approximate quantum dynamics, for a second quantised field, when the
+field is expanded over modes such that there are many excitations
+in each mode \cite{aip-57-363}.
+
+This is very simple to put into practice as a Monte-Carlo method,
+where an ensemble of classical configurations is drawn from the Wigner
+distribution, and these sample configurations are propagated under
+the classical laws of motion. In the calculations reported here, each
+configuration is an order parameter for the atomic field, and the
+classical law of motion is the Gross-Pitaevskii equation.
+
+\section{Truncated Wigner simulations}
+
+\begin{figure}
+
+\caption{1D gas with $\gamma=1$, length 10, coherent state. Wave number truncated
+to make kinetic energy converge. Something still not right.}
+\includegraphics{resp080817b}\includegraphics{resp080817c}\includegraphics{resp080817d}
+
+\end{figure}
+
+\begin{figure}
+\caption{Quadratures}
+\begin{tabular}{|c|c|}
+\hline 
+\includegraphics[width=0.45\textwidth]{resp090617e} & \includegraphics[width=0.45\textwidth]{resp090617f}\tabularnewline
+\hline 
+ & \tabularnewline
+\hline 
+ & \tabularnewline
+\hline 
+ & \tabularnewline
+\hline 
+\end{tabular}
+
+\end{figure}
+There is a limit where a coherent state is stationary, and a broader
+limit where a Bogoliubov state is stationary but a coherent state
+oscillates. Note that the oscillations of the coherent state seem
+to converge to a fixed pattern in the small $\gamma$ limit, although
+the timescale on which the mean quadratures decay becomes slower.
+In the conditions simulated here, with $\gamma\le0.1$, the value
+of $g^{2}$ in the exact Lieb-Liniger ground state agrees with the
+value in the Bogoliubov state to within a few percent \cite{prl-91-040403},
+so the Bogoliubov graphs of $g^{2}$ are exact to within a few percent
+at $t=0$.
+\begin{figure}
+\caption{Second order coherence of a 1D Bose gas starting from coherent and
+Bogoliubov states, for various Leib-Liniger parameters and sizes of
+gas}
+\begin{tabular}{|c|c|}
+\hline 
+\includegraphics[width=0.45\textwidth]{resp090617g} & \includegraphics[width=0.45\textwidth]{resp090617h}\tabularnewline
+\hline 
+\includegraphics[width=0.45\textwidth]{resp090617a} & \includegraphics[width=0.45\textwidth]{resp090617b}\tabularnewline
+\hline 
+\includegraphics[width=0.45\textwidth]{/Users/rpolkinghorne/Desktop/oscor/resp160617a} & \includegraphics[width=0.45\textwidth]{/Users/rpolkinghorne/Desktop/oscor/resp160617b}\tabularnewline
+\hline 
+\includegraphics[width=0.45\textwidth]{resp090617c} & \includegraphics[width=0.45\textwidth]{resp090617d}\tabularnewline
+\hline 
+ & \tabularnewline
+\hline 
+\end{tabular}
+\end{figure}
+The quartic oscillator limit
+
+Presumably a Bogoliubov state reduces to a squeezed state in the small
+cloud limit where there is only one mode? As expected, $g^{2}(0)$
+is conserved in a quartic oscillator. The Bogoliubov quadratures are
+qualitatively similar to the coherent ones.
+\begin{figure}
+
+\caption{The small gas limit}
+\begin{tabular}{|c|c|}
+\hline 
+\includegraphics[width=0.45\textwidth]{resp090617i} & \includegraphics[width=0.45\textwidth]{resp090617j}\tabularnewline
+\hline 
+\includegraphics[width=0.45\textwidth]{resp090617k} & \includegraphics[width=0.45\textwidth]{resp090617l}\tabularnewline
+\hline 
+\end{tabular}
+
+\end{figure}
+ 
+
+\section*{Derivation of Bogoliubov coefficients}
+
+In the Hamiltonian of Equation\textasciitilde{}\ref{eq:ii}, let $H=\int\hat{H}(x)\,dx$,
+and substitute the mean-field form $\hat{\psi}=\psi_{0}+\delta\hat{\psi}$.
+Expanding to second order in $\delta\hat{\psi}$ gives \textbf{check
+the multinomial coefficients}{*}
+\[
+\begin{aligned}\hat{H}(x) & =\hat{\psi}{}^{\dagger}(x)\left(-\partial_{z}^{2}-1\right)\hat{\psi}(x)+\sqrt{\frac{\gamma}{2}}\left(\hat{\psi}^{\dagger}(x)\right)^{2}\hat{\psi}^{2}(x)\\
+ & =\psi_{0}^{*}\left(-\partial_{z}^{2}-1\right)\psi_{0}+\sqrt{\frac{\gamma}{2}}\left|\psi_{0}\right|^{4}\\
+ & \qquad+\delta\hat{\psi}^{\dagger}\left(-\partial_{z}^{2}+\sqrt{2\gamma}\left|\psi_{0}\right|^{2}-1\right)\psi_{0}+\text{h.c.}\\
+ & \qquad\delta\hat{\psi}^{\dagger}\left(-\partial_{z}^{2}+2\sqrt{2\gamma}\left|\psi_{0}\right|^{2}-1\right)\delta\hat{\psi}+\sqrt{\frac{\gamma}{2}}\left(\psi_{0}^{*}\right)^{2}\delta\hat{\psi}^{2}+\sqrt{\frac{\gamma}{2}}\psi_{0}^{2}\left(\delta\hat{\psi}^{\dagger}\right)^{2}\\
+ & \qquad+O\left(\delta\hat{\psi}^{3}\right).
+\end{aligned}
+\]
+With a uniform and real order parameter$\psi_{0}^{2}=1/\sqrt{2\gamma}$,
+the first line is a constant $1/2\sqrt{2\gamma}$, the second line
+is zero, and the third lines becomes
+\[
+\hat{H}(x)=\left(-\partial_{z}^{2}+1\right)\delta\hat{\psi}^{\dagger}\delta\hat{\psi}+\frac{1}{2}\delta\hat{\psi}^{2}+\frac{1}{2}\left(\delta\hat{\psi}^{\dagger}\right)^{2}.
+\]
+In this case, performing a Bogoliubov transformation
+\[
+\delta\hat{\psi}(x)=\sqrt{\frac{2\xi}{L}}\sum_{n=1}^{\infty}\left(\left(u_{n}^{*}a_{n}-v_{n}a_{n}^{\dagger}\right)\sin(\kappa_{n}x)+\left(u_{n}^{*}b_{n}-v_{n}b_{n}^{\dagger}\right)\cos(\kappa_{n}x)\right)
+\]
+where $\kappa_{n}=k_{n}\xi=2\pi n\xi/L$ is the wave number in terms
+of the healing length, and each term is an eigenfunction of the Laplacian
+belonging to the eigenvalue $-\kappa_{n}^{2}$, gives $H=1/2\sqrt{2\gamma}+\sum_{n}H_{an}+H_{bn}$,
+where
+\[
+\begin{aligned}H_{an} & =\left(\kappa_{n}^{2}+1\right)\left(\left|v_{n}\right|^{2}+\left(\left|u_{n}\right|^{2}+\left|v_{n}\right|^{2}\right)a_{n}^{\dagger}a_{n}-u_{n}^{*}v_{n}^{*}a_{n}^{2}-u_{n}v_{n}\left(a_{n}^{\dagger}\right)^{2}\right)\\
+ & \qquad+\frac{1}{2}\left(-u_{n}^{*}v_{n}-2u_{n}^{*}v_{n}a_{n}^{\dagger}a_{n}+\left(u_{n}^{*}\right)^{2}a_{n}^{2}+v_{n}^{2}\left(a_{n}^{\dagger}\right)^{2}+\text{h.c.}\right)
+\end{aligned}
+\]
+and $H_{bn}$is formed from $H_{an}$by substituting $b_{n}$for $a_{n}$.
+In order for $\delta\hat{\psi}(x)$ to satisfy the canonical commutation
+relation for a Bose field operator, the coefficients must satisfy
+$u_{n}^{2}-v_{n}^{2}=1$. To cancel the terms in $\left(a_{n}^{\dagger}\right)^{2}$
+and diagonalise the Hamiltonian, we need 
+\[
+u_{n}^{2}+v_{n}^{2}-2\left(\kappa_{n}^{2}+1\right)u_{n}v_{n}=0,
+\]
+
+with solution
+\[
+u_{n}^{2}=\cosh^{2}r=\frac{\kappa+\kappa^{-1}}{2\sqrt{\kappa^{2}+2}}+\frac{1}{2}\qquad v_{n}^{2}=\sinh^{2}r=\frac{\kappa+\kappa^{-1}}{2\sqrt{\kappa^{2}+2}}-\frac{1}{2},
+\]
+where 
+\[
+2r=\tanh^{-1}\frac{1}{\kappa_{n}^{2}+1}
+\]
+has the form of a squeezing parameter. The large $\kappa$ limit is
+$v^{2}\approx1/4\kappa^{4}$. The small $\kappa$ limit is $v^{2}\approx1/2\sqrt{2}\kappa$,
+whence the density of uncondensed atoms in the longest wavelength
+mode is $1/4\pi\sqrt{2}$.
+
+The Hamiltonian reduces to
+\[
+\begin{aligned}H_{an} & =\left(\kappa_{n}^{2}+1\right)\left(\frac{\kappa+\kappa^{-1}}{2\sqrt{\kappa^{2}+2}}-\frac{1}{2}\right)-\sqrt{\frac{\left(\kappa+\kappa^{-1}\right)^{2}}{4\left(\kappa^{2}+2\right)}-\frac{1}{4}}+a_{n}^{\dagger}a_{n}\left(\left(\kappa_{n}^{2}+1\right)\frac{\kappa+\kappa^{-1}}{\sqrt{\kappa^{2}+2}}-2\sqrt{\frac{\left(\kappa+\kappa^{-1}\right)^{2}}{4\left(\kappa^{2}+2\right)}-\frac{1}{4}}\right)\\
+ & =\frac{1}{\sqrt{\kappa^{2}+2}}\left(\frac{1}{2}\left(\kappa_{n}^{2}+1\right)\left(\kappa+\kappa^{-1}-\sqrt{\kappa^{2}+2}\right)-\frac{1}{2\kappa}+a_{n}^{\dagger}a_{n}\left(\left(\kappa_{n}^{2}+1\right)\left(\kappa+\kappa^{-1}\right)-\frac{1}{\kappa}\right)\right)\\
+ & =\cdots+\kappa_{n}\sqrt{\kappa_{n}^{2}+2}a_{n}^{\dagger}a_{n}
+\end{aligned}
+\]
+
+The total particle number is
+\[
+\begin{aligned}\left\langle n\right\rangle =\left|\psi_{0}\right|^{2} & +\left\langle \delta\hat{\psi}^{\dagger}\delta\hat{\psi}\right\rangle \\
+ & +\frac{2\xi}{L}\sum_{n=1}^{\infty}\left|v_{n}\right|^{2}\\
+ & +\frac{2\xi}{L}\sum_{n=1}^{\infty}\frac{\kappa+\kappa^{-1}}{2\sqrt{\kappa^{2}+2}}-\frac{1}{2}\\
+ & +\frac{1}{\pi}\int_{0}^{\infty}\frac{\kappa+\kappa^{-1}}{2\sqrt{\kappa^{2}+2}}-\frac{1}{2}\,d\kappa
+\end{aligned}
+\]
+where the last line takes the $L\gg\xi$ limit of infinite extent.
+(The integral diverges, as expected in 1D where the condensate fraction
+is zero.) In the units used here, the density of uncondensed bosons
+is independent of $\gamma$, but the condensate density is $1/\sqrt{2\gamma}$
+. 
+
+The $\kappa=0$ condensate mode, with $u_{n}=1$ and $v_{n}=0$, gives
+\[
+H_{a0}=\left(a_{n}^{\dagger}a_{n}\right)+\frac{1}{2}a_{n}^{2}+\frac{1}{2}\left(\text{\ensuremath{a_{n}^{\dagger}}}\right)^{2}.
+\]
+The mean field approximation, with a coherent condensate mode, is
+inconsistent to second order. The consistent solution requires infinite
+squeezing, in which case $\delta\hat{\psi}$ is no longer small. So
+maybe the Bogoliubov state should not be expected to give sensible
+results for quadratures or other parameters of the condensate orbital.
+
+\bibliographystyle{plain}
+\bibliography{pra-0-0}
+
+\end{document}

@@ -1,0 +1,104 @@
+B: BECs are simulated in second quantisation, using approximate Bose gas ground states
+P: difficult to compare approximate states to exact Lieb-Liniger wavefunction
+C: can't estimate uncertainty in BEC simulations
+S: test steadiness of kinetic and repulsion energy in the approximate states
+
+Bose-Einstein condensate
+
+Hamiltonian
+scattering length
+field operator
+
+dispersion relation, scaled units
+
+classical field
+coherent state limit of non-interacting bosons
+order parameter satisfies Gross-Pitaevskii equation
+
+healing length, smallest scale of classical field
+everything else is geometry
+extent of unform gas
+
+elongated plane line
+transverse area
+scale to healing length
+Lieb-Linger γ
+	inverse square of bosons per healing length
+	classical field limit is small γ with many bosons in each classical field feature
+
+one-dimensional mean field is unphysical
+density of states
+spatial coherence
+
+steady state
+interference experiments
+	photographs
+	density
+	higher order coherence
+
+density
+
+Lieb-Liniger ground state
+	exact first-quantised wave function
+	Hellmann-Feynman theorem
+
+approximations to the second quantised field
+
+strong classical limit γ « 1
+	approximate field as coherent state
+	order parameter is coherent amplitude
+
+weak classical limit γ ≲ 1
+correlated positions
+Bogoliubov squeezed state
+
+expectation values in the ground state are stationary
+computed dynamics can test the approximations
+uniform density strongly constrained by energy
+Glauber second order coherence function
+	this is proportional to repulsion energy for contact potentials
+laboratories
+
+Daltonian nitpicking
+
+second order binomial expansion in order parameter and fluctuations
+Bogoliubov = squeezing transform
+linear dispersion long wavelength
+sound wave modes
+Bogoliubov sound speed is √2
+	scaled frequency of a mode is κ / √2
+	independent of γ for all wavelengths
+quadratic dispersion short wavelength
+quasiparticles
+
+Bogoliubov Hamiltonian
+rotating squeezed orbitals
+oscillations
+
+limit of tight confinement
+small extent
+	bogoliubov approximation doesn't have a consistent limit
+	Lieb-Liniger limit?
+quartic oscillator
+	amplitude decays
+	first and second order coherence are conserved
+
+intermediate regime
+
+truncated Wigner
+classical probability density
+good approximation with many bosons per field mode
+Monte-Carlo Gross Pitaevskii equation
+
+TW quadratures compared to quartic oscillator
+
+Bogoliubov much steadier even in strong classical limit
+fixed shape of oscillations in strong classical limit
+	as γ varies with constant L/ξ, the coherent state quasiparticle modes are constant, and all that changes is the condensate density
+	extra repulsion energy of coherent state has to go somewhere, becomes kinetic energy, causes fluctuations
+similar in weak classical limit
+
+At γ = 0.1, g² recovers over time in both initial conditions.  This is wierd, because the initial Bogoliubov g² is exact to within a few percent
+
+Conclusions
+be careful about deducing correlations from coherent states
