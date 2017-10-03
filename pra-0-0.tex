@@ -36,17 +36,14 @@ Bose gas}
 \author{Rodney E. S. Polkinghorne}
 \email[]{rpolkinghorne@swin.edu.au}
 
-\selectlanguage{english}%
 
 \author{Bogdan Opanchuk}
 \email[]{bopanchuk@swin.edu.au}
 
-\selectlanguage{english}%
 
 \author{Peter D. Drummond}
 \email[]{pdrummond@swin.edu.au}
 
-\selectlanguage{english}%
 
 \affiliation{Centre for Quantum and Optical Science, Swinburne University of Technology}
 
@@ -66,44 +63,74 @@ state to undergo oscillations in its coherence function.
 
 \section{Introduction}
 
-When Bose-Einstein condensates were made in dilute gasses \cite{sci-269-198,prl-75-3969},
-the phenomenon that attracted early interest was the interference
-arising from the global order parameter of this phase \textbf{\cite{sci-275-637}}.
+When the first Bose-Einstein condensates were made in dilute gases
+\cite{sci-269-198,prl-75-3969}, research focused on their global
+order parameter \textbf{\cite{sci-275-637}}. If the condensed gas
+has many bosons, its order parameter is a classical field, which diffracts
+and interferes much as light does. A condensate of non-interacting
+bosons occupies a single orbital, and is exactly analogous to coherent
+light. When the bosons interact, the condensate occupies multiple
+orbitals, but it can often be approximated by a classical field with
+a nonlinear equation of motion \textbf{citation for GPE}.
+
 There is a limited amount to be said about interference in a totally
 coherent field, and attention shifted to other aspects of BECs. More
-recently, it has become possible to form the gasses into very elongated
+recently, it has become possible to form the gases into very elongated
 clouds \cite{prl-79-549}, where the atomic field is effectively a
 plane or a line. The density of states in these low-dimensional geometries
 differs from that in three dimensions, with the consequence that a
 condensate with a global order parameter does not exist in a one-dimensional
 Bose gas at any finite temperature \cite{prl-85-3745}. This raised
-a new set of questions about spatial coherence in these systems, which
-interference experiments are the obvious means to answer. Such experiments
-have been underway in several laboratories for some years \cite{nap-1-57,nat-462-74}.
+a new set of questions about spatial coherence in these systems, questions
+which interference experiments are the obvious means to answer. Such
+experiments have been underway in several laboratories for some years
+\cite{nap-1-57,nat-462-74}.
 
-As well as the experiments, theoretical studies have explored the
-spatial coherence of the Bose gas in one-dimension.
+As well as the experiments, theoretical and numerical studies have
+explored the spatial coherence of the Bose gas in one-dimension. This
+is a many-particle quantum system, and the methods used to calculate
+its properties usually describe the gas in second quantisation. These
+simulations must use some approximate forms for the state of the interacting
+condensate. The coherent state is the limit of non-interacting bosons,
+and the Hamiltonian can expanded as a second order Taylor series around
+this limit. The Bogoliubov state is the ground state of that approximate
+Hamiltonian, and it is often used in theoretical work.
 
-\textbf{What problem are we solving, and why it matters.}
+The exact ground state of an interacting Bose gas is known in first
+quantisation, but it is difficult to compare this to the approximate
+second-quantised ground states. As a result, it is hard to estimate
+the uncertainty introduced by the approximate ground state.
+
+This paper will test the approximate ground states by computing their
+dynamics. The exact ground state is stationary, and so the quality
+of the approximation can be assessed by how nearly stationary the
+approximate ground states are. We will find that even a coherent state
+has a stationary density, because repulsion puts a tight constraint
+on how much the density can vary. However, the correlations in the
+positions of the bosons are a more sensitive test. These can be quantified
+by the second order coherence function, which can be measured by counting
+coincident bosons. The main results of this paper are the dynamics
+of this coherence function, which indicate the quality of the approximate
+ground states for a range of gas sizes and repulsion parameters.
+
+Independent approximation, TW dynamics.
 
 \section{The interacting Bose gas and its ground state}
 
-In SI units, the second quantised Hamiltonian of an interacting but
-untrapped Bose gas is
+In SI units, the Hamiltonian of an interacting but untrapped Bose
+gas is
 
 \begin{equation}
-\hat{H}_{\text{SI}}=\frac{\hbar^{2}}{2m}\int\hat{\psi}{}^{\dagger}(x)\left(-\nabla^{2}-\xi^{-2}\right)\hat{\psi}(x)+4\pi a\left(\hat{\psi}^{\dagger}(x)\right)^{2}\hat{\psi}^{2}(x)\,dx.\label{eq:i}
+\hat{H}_{\text{SI}}=\frac{\hbar^{2}}{2m}\hat{H}=\frac{\hbar^{2}}{2m}\int\hat{\psi}{}^{\dagger}(x)\left(-\nabla^{2}-\xi^{-2}\right)\hat{\psi}(x)+4\pi a\left(\hat{\psi}^{\dagger}(x)\right)^{2}\hat{\psi}^{2}(x)\,dx.\label{eq:i}
 \end{equation}
-The bosons are identical particles of mass $m$, annihilated by the
-field operator $\hat{\psi}(x)$, interacting by a contact potential
-with scattering length $a$. To simplify some calculations that follow,
-they have a uniform potential energy proportional to $-\xi^{-2}$,
-which can be adjusted to set the chemical potential of the ground
-state to zero. In the scaled units used in this paper, with $\hbar^{2}=2m$,
-the Hamiltonian reduces to
-\begin{equation}
-\hat{H}=\int\hat{\psi}{}^{\dagger}(x)\left(-\nabla^{2}-\xi^{-2}\right)\hat{\psi}(x)+4\pi a\left(\hat{\psi}^{\dagger}(x)\right)^{2}\hat{\psi}^{2}(x)\,dx.\label{eq:vi}
-\end{equation}
+The bosons are identical particles of mass $m$, that interact through
+a contact potential with scattering length $a$, and are annihilated
+by the second-quantised field operator $\hat{\psi}(x)$. Each boson
+has been assigned a potential energy $-\hbar^{2}/\left(2m\xi^{2}\right)$,
+enabling some of the following calculations to be simplified by allowing
+the chemical potential of the interacting ground state to be adjusted
+to zero. This paper uses scaled units with $\hbar^{2}=2m$, which
+reduce the Hamiltonian from $\hat{H}_{\text{SI}}$ to $\hat{H}$.
 
 It is well known that a Bose gas condenses below a critical temperature,
 a phase transition for which the field of the bosons occupying the
@@ -111,53 +138,76 @@ condensate orbital is an order parameter. The state of these condensed
 bosons is often taken to be a coherent state $\left|\psi(x)\right\rangle $,
 in which case the coherent amplitude $\psi(x)$ is an order parameter.
 If a variational ansatz is imposed, under which the state of the Bose
-field remains coherent, this order parameter has a variational solution
-$\psi(x)$ such that $\left|\psi(x)\right\rangle $ satisfies $i\hbar\frac{d}{dt}\left|\psi(x)\right\rangle =\hat{H}_{\text{SI}}\left|\psi(x)\right\rangle $
-in the Dirac-Frenkel sense. This solution satisfies the Gross-Pitaevskii
-equation,
+field remains coherent but the order parameter may vary over time,
+this order parameter has a variational solution $\psi(t,x)$ such
+that the coherent ansatz$\left|\psi(t,x)\right\rangle $ satisfies
+$\frac{\partial}{\partial t}\left|\psi(t,x)\right\rangle =-i\hat{H}\left|\psi(t,x)\right\rangle $
+in the Dirac-Frenkel sense \textbf{citation}. This solution satisfies
+the Gross-Pitaevskii equation,
 \begin{equation}
-i\frac{\partial\psi}{\partial t}=\left(-\nabla^{2}-\xi^{-2}+8\pi a\left|\psi\right|^{2}\right)\psi,\label{eq:vii}
+\frac{\partial\psi}{\partial t}=-i\left(-\nabla^{2}-\xi^{-2}+8\pi a\left|\psi\right|^{2}\right)\psi.\label{eq:vii}
 \end{equation}
-so the assumption of a coherent state reduces the quantum Bose field
-to a classical field, the order parameter.
+The assumption of a coherent state reduces the quantum Bose field
+to a classical order parameter field, which is far easier to reason
+about and calculate with.
 
 The quantity $\xi=\left(8\pi a\left|\psi\right|^{2}\right)^{-1/2}$
 is called the healing length. This paper will consider uniform systems,
 in which the healing length is constant, and the constant $\xi$ in
-Equation \ref{eq:vi} will always be set equal to it. In the classical
+Equation \ref{eq:i} will always be set equal to it. In the classical
 field theory of the order parameter, the healing length is the only
 physically meaningful property of the gas itself. It is the scale
 over which the order parameter drops to zero where the gas is confined
 at a hard edge; this is the shortest scale on which features can occur
-in the order parameter.
+in the order parameter. The healing length sets the boundary between
+long distances on which the density of the gas can vary, and short
+ones on which repulsion makes it uniform. As well as setting $\hbar^{2}=2m$,
+this paper will use the healing length as its length unit, at which
+point all mechanical properties of the bosons scale to dimensionless
+quantities.
 
-Suppose that the gas is tightly confined along the $z$-axis, and
-has a field operator of the form $\hat{\psi}(x,y,z)=\theta(x,y)\hat{\psi}(z)$.
+In the classical field governed by Equation \ref{eq:vii}, all parameters
+except the healing length are properties of the apparatus that holds
+the gas, not of the gas itself. This paper will focus on uniform gases
+with periodic boundary conditions, whose only other parameter is the
+size of the gas. The transverse area that will be discussed shortly
+is another of these geometric parameters.\textbf{ Explain what it
+means for the healing length to be smaller than the system size with
+periodic boundary conditions and a uniform condensate. How physical
+is this?}
+
+Suppose that the gas is held in a cigar-shaped trap, which confines
+it tightly along the $z$-axis. The bosons will only occupy the ground
+orbital of the transverse potential, at least in the limit of very
+tight confinement, and their field operator will factorise in the
+form $\hat{\psi}(x,y,z)=\theta(x,y)\hat{\psi}(z)$. This reduces the
+Hamiltonian to
 \begin{equation}
-H=\int\hat{\psi}{}^{\dagger}(x)\left(-\partial_{z}^{2}-\xi^{-2}\right)\hat{\psi}(x)+\frac{4\pi a}{A}\left(\hat{\psi}^{\dagger}(x)\right)^{2}\hat{\psi}^{2}(x)\,dx,\label{eq:v}
+\hat{H}=\int\hat{\psi}{}^{\dagger}(z)\left(-\partial_{z}^{2}-\xi^{-2}\right)\hat{\psi}(z)+\frac{4\pi a}{A}\left(\hat{\psi}^{\dagger}(z)\right)^{2}\hat{\psi}^{2}(z)\,dz,\label{eq:v}
 \end{equation}
-where $A=1/\int\left|\theta\right|^{4}$ is effectively the area of
-the transverse orbital $\theta$. In the case of a uniform density
-$n$, the repulsion coefficient is $4\pi a/A=n\gamma,$ where the
-Lieb-Liniger parameter $\gamma$ measures how far the gas lies from
-the coherent limit that describes non-interacting bosons such as photons.
-This paper uses as its length unit the healing length $\xi=1/\sqrt{2\gamma}n$,
-the classical boundary between long distances on which the density
-of the gas can vary, and short ones on which the gas is made uniform
-by repulsion. In these units, the Hamiltonian becomes
+where $A=1/\int\left|\theta\right|^{4}$ is the area occupied by the
+transverse ground orbital $\theta$. In the case of a uniform density
+$n$, it is possible to define a dimensionless parameter $\gamma$
+such that the repulsion coefficient is $4\pi a/A=n\gamma$ and the
+healing length is $\xi=1/\sqrt{2\gamma}n$. This is called the Lieb-Liniger
+parameter, and it measures how far the gas lies from the coherent
+limit of non-interacting bosons such as photons. When lengths are
+scaled to the healing length, the Hamiltonian becomes
 
 \begin{equation}
-H=\int\hat{\psi}{}^{\dagger}(x)\left(-\partial_{z}^{2}-1\right)\hat{\psi}(x)+\sqrt{\frac{\gamma}{2}}\left(\hat{\psi}^{\dagger}(x)\right)^{2}\hat{\psi}^{2}(x)\,dx,\label{eq:ii}
+\hat{H}=\int\hat{\psi}{}^{\dagger}(z)\left(-\partial_{z}^{2}-1\right)\hat{\psi}(z)+\sqrt{\frac{\gamma}{2}}\left(\hat{\psi}^{\dagger}(z)\right)^{2}\hat{\psi}^{2}(z)\,dz,\label{eq:ii}
 \end{equation}
-and the boson density is $\left\langle \hat{\psi}{}^{\dagger}(x)\hat{\psi}(x)\right\rangle =\xi n=1/\sqrt{2\gamma}$.
+and the boson density is $\left\langle \hat{\psi}{}^{\dagger}(z)\hat{\psi}(z)\right\rangle =\xi n=1/\sqrt{2\gamma}$.
 
-The ground state of this system was found by Lieb and Liniger \cite{prx-130-1605}.
-It has a fairly simple form in first quantisation: the many-particle
-wave function is composed from pieces of free-particle wave functions,
-with appropriate boundary conditions on the planes where two of the
-particles coincide. This form is very complicated in second quantisation,
-so some approximations are often used. These are described in Section
-\ref{sec:Coherent}.
+\rule[0.5ex]{1\columnwidth}{1pt}
+
+The ground state of this one-dimensional Bose gas was found by Lieb
+and Liniger \cite{prx-130-1605}. It has a fairly simple form in first
+quantisation: the many-particle wave function is composed from pieces
+of free-particle wave functions, with appropriate boundary conditions
+on the hyperplanes where two of the particles coincide. This form
+is very complicated in second quantisation, so some approximations
+are often used. These are described in Section \ref{sec:Coherent}.
 
 To date, many experiments have studied the density of a Bose gas,
 but few have studied higher order coherence functions. These gases
@@ -232,15 +282,35 @@ the operator $\hat{\delta\psi}$ is small compared to the order parameter
 $\psi_{0}$. The Hamiltonian of Equation \ref{eq:ii} is expanded
 as a binomial in $\psi_{0}$ and $\hat{\delta\psi}$, and the terms
 of third and forth order in $\hat{\delta\psi}$ are dropped. For a
-uniform gas, this results in a Hamiltonian
+uniform gas of density $\psi_{0}^{2}=1/\sqrt{2\gamma}$, this results
+in a Hamiltonian
 \[
-H_{B}=\text{const.}+\sum_{n}\kappa_{n}\sqrt{\kappa_{n}^{2}+2}\left(a_{n}^{\dagger}a_{n}+b_{n}^{\dagger}b_{n}\right),
+\hat{H}(x)=-\frac{1}{2\sqrt{2\gamma}}+\left(-\partial_{z}^{2}+1\right)\delta\hat{\psi}^{\dagger}\delta\hat{\psi}+{\textstyle \frac{1}{2}}\delta\hat{\psi}^{2}+{\textstyle \frac{1}{2}}\left(\delta\hat{\psi}^{\dagger}\right)^{2}.
 \]
-where $\kappa_{n}=k_{n}\xi=2\pi n\xi/L$ is the scaled wave number
-of a quasiparticle, and the quasiparticle operators $a_{n}$and $b_{n}$
-form a squeezed expansion of the boson field, as
+
+A Bogoliubov transform can be performed, in which $\delta\hat{\psi}$
+is expanded as
 \[
-\delta\hat{\psi}(x)=\sqrt{\frac{2\xi}{L}}\sum_{n=1}^{\infty}\left(\left(u_{n}^{*}a_{n}-v_{n}a_{n}^{\dagger}\right)\sin(\kappa_{n}x)+\left(u_{n}^{*}b_{n}-v_{n}b_{n}^{\dagger}\right)\cos(\kappa_{n}x)\right).
+\delta\hat{\psi}(x)=\sum_{j=1}^{\infty}\left(u_{j}^{\ast}\hat{a}_{j}-v_{j}\hat{a}_{j}^{\dagger}\right)w_{j}(x).
+\]
+The orthonormal modes $w_{j}$ are given by
+\[
+w_{2n-1}(x)={\textstyle \sqrt{\frac{2\xi}{L}}}\sin(\kappa_{n}x),\qquad w_{2n}(x)={\textstyle \sqrt{\frac{2\xi}{L}}}\cos(\kappa_{n}x),
+\]
+where $L$ is the length of the one-dimensional gas in SI units, and
+the modes have scaled wave numbers $\kappa_{n}=2\pi n\xi/L$ . The
+mode operators $\hat{a}_{j}$ and $\hat{a}_{j}^{\dagger}$ should
+satisfy the Bose commutation relation $\left[\hat{a}_{j},\hat{a}_{j}^{\dagger}\right]=1$,
+which requires the coefficients $u_{j}$ and $v_{j}$ to satisfy $u_{j}^{2}-v_{j}^{2}=1.$
+If the coefficients are chosen such that
+\[
+u_{2n-1}^{2}=u_{2n}^{2}=\frac{\kappa_{n}+\kappa_{n}^{-1}}{2\sqrt{\kappa_{n}^{2}+2}}+\frac{1}{2}\qquad v_{2n-1}^{2}=v_{2n}^{2}=\frac{\kappa_{n}+\kappa_{n}^{-1}}{2\sqrt{\kappa_{n}^{2}+2}}-\frac{1}{2},
+\]
+there are no interactions between the modes, and the Hamiltonian takes
+the diagonal form
+
+\[
+H_{B}=\text{const.}+\sum_{n}\kappa_{n}\sqrt{\kappa_{n}^{2}+2}\left(a_{n}^{\dagger}a_{n}+b_{n}^{\dagger}b_{n}\right).
 \]
 
 The frequency of the quasiparticle mode with wavelength $\kappa_{n}$
@@ -451,12 +521,12 @@ qualitatively similar to the coherent ones.
 
 \section*{Derivation of Bogoliubov coefficients}
 
-In the Hamiltonian of Equation\textasciitilde{}\ref{eq:ii}, let $H=\int\hat{H}(x)\,dx$,
-and substitute the mean-field form $\hat{\psi}=\psi_{0}+\delta\hat{\psi}$.
+In the Hamiltonian of Equation\textasciitilde{}\ref{eq:ii}, let $\hat{H}=\int\hat{H}(z)\,dz$,
+and substitute the mean-field form $\hat{\psi}(z)=\psi_{0}+\delta\hat{\psi}(z)$.
 Expanding to second order in $\delta\hat{\psi}$ gives \textbf{check
 the multinomial coefficients}{*}
 \[
-\begin{aligned}\hat{H}(x) & =\hat{\psi}{}^{\dagger}(x)\left(-\partial_{z}^{2}-1\right)\hat{\psi}(x)+\sqrt{\frac{\gamma}{2}}\left(\hat{\psi}^{\dagger}(x)\right)^{2}\hat{\psi}^{2}(x)\\
+\begin{aligned}\hat{H}(z) & =\hat{\psi}{}^{\dagger}(x)\left(-\partial_{z}^{2}-1\right)\hat{\psi}(x)+\sqrt{\frac{\gamma}{2}}\left(\hat{\psi}^{\dagger}(x)\right)^{2}\hat{\psi}^{2}(x)\\
  & =\psi_{0}^{*}\left(-\partial_{z}^{2}-1\right)\psi_{0}+\sqrt{\frac{\gamma}{2}}\left|\psi_{0}\right|^{4}\\
  & \qquad+\delta\hat{\psi}^{\dagger}\left(-\partial_{z}^{2}+\sqrt{2\gamma}\left|\psi_{0}\right|^{2}-1\right)\psi_{0}+\text{h.c.}\\
  & \qquad\delta\hat{\psi}^{\dagger}\left(-\partial_{z}^{2}+2\sqrt{2\gamma}\left|\psi_{0}\right|^{2}-1\right)\delta\hat{\psi}+\sqrt{\frac{\gamma}{2}}\left(\psi_{0}^{*}\right)^{2}\delta\hat{\psi}^{2}+\sqrt{\frac{\gamma}{2}}\psi_{0}^{2}\left(\delta\hat{\psi}^{\dagger}\right)^{2}\\
@@ -465,7 +535,7 @@ the multinomial coefficients}{*}
 \]
 With a uniform and real order parameter$\psi_{0}^{2}=1/\sqrt{2\gamma}$,
 the first line is a constant $1/2\sqrt{2\gamma}$, the second line
-is zero, and the third lines becomes
+is zero, and the third line becomes
 \[
 \hat{H}(x)=\left(-\partial_{z}^{2}+1\right)\delta\hat{\psi}^{\dagger}\delta\hat{\psi}+\frac{1}{2}\delta\hat{\psi}^{2}+\frac{1}{2}\left(\delta\hat{\psi}^{\dagger}\right)^{2}.
 \]
@@ -476,7 +546,9 @@ In this case, performing a Bogoliubov transformation
 where $\kappa_{n}=k_{n}\xi=2\pi n\xi/L$ is the wave number in terms
 of the healing length, and each term is an eigenfunction of the Laplacian
 belonging to the eigenvalue $-\kappa_{n}^{2}$, gives $H=1/2\sqrt{2\gamma}+\sum_{n}H_{an}+H_{bn}$,
-where
+where \textbf{(The constant is the energy difference between the coherent
+state (which we set to zero) and the correlated Bogoliubov state.
+The Bogoliubov state should have lower energy, so this should be negative.)}
 \[
 \begin{aligned}H_{an} & =\left(\kappa_{n}^{2}+1\right)\left(\left|v_{n}\right|^{2}+\left(\left|u_{n}\right|^{2}+\left|v_{n}\right|^{2}\right)a_{n}^{\dagger}a_{n}-u_{n}^{*}v_{n}^{*}a_{n}^{2}-u_{n}v_{n}\left(a_{n}^{\dagger}\right)^{2}\right)\\
  & \qquad+\frac{1}{2}\left(-u_{n}^{*}v_{n}-2u_{n}^{*}v_{n}a_{n}^{\dagger}a_{n}+\left(u_{n}^{*}\right)^{2}a_{n}^{2}+v_{n}^{2}\left(a_{n}^{\dagger}\right)^{2}+\text{h.c.}\right)

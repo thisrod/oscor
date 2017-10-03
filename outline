@@ -3,7 +3,25 @@ P: difficult to compare approximate states to exact Lieb-Liniger wavefunction
 C: can't estimate uncertainty in BEC simulations
 S: test steadiness of kinetic and repulsion energy in the approximate states
 
+
+# Introduction
+
 Bose-Einstein condensate
+
+order parameter
+
+interference (mention experiments in passing)
+
+coherent state (or number state) is the limit of non-interacting bosons
+interacting bosons occupy multiple orbitals
+
+density correlations
+
+low-dimensional geometry
+
+other theory
+
+# The interacting Bose gas in one dimension
 
 Hamiltonian
 scattering length
@@ -11,57 +29,53 @@ field operator
 
 dispersion relation, scaled units
 
+coherent state
+Dirac-Frenkel
 classical field
-coherent state limit of non-interacting bosons
 order parameter satisfies Gross-Pitaevskii equation
 
 healing length, smallest scale of classical field
-everything else is geometry
+all other classical parameters are properties of the apparatus holding the gas
 extent of unform gas
+scale to healing length, dimensionless
 
-elongated plane line
+cigar shaped trap
 transverse area
-scale to healing length
 Lieb-Linger γ
 	inverse square of bosons per healing length
 	classical field limit is small γ with many bosons in each classical field feature
 
-one-dimensional mean field is unphysical
-density of states
-spatial coherence
+one-dimensional mean field is a physical limit
+spatial coherence is how the limit is approached
 
-steady state
-interference experiments
-	photographs
-	density
-	higher order coherence
-
-density
+# The ground state
 
 Lieb-Liniger ground state
 	exact first-quantised wave function
 	Hellmann-Feynman theorem
 
-approximations to the second quantised field
+many-particle theory in terms of the second quantised field, need approximations that are tractable in second quantisation
+
+# The coherent approximation
 
 strong classical limit γ « 1
 	approximate field as coherent state
 	order parameter is coherent amplitude
 
-weak classical limit γ ≲ 1
-correlated positions
-Bogoliubov squeezed state
-
-expectation values in the ground state are stationary
-computed dynamics can test the approximations
-uniform density strongly constrained by energy
-Glauber second order coherence function
-	this is proportional to repulsion energy for contact potentials
-laboratories
+gets density right
 
 Daltonian nitpicking
 
+# The Bogoliubov approximation
+
+weak classical limit γ ≲ 1
+correlated positions
+Bogoliubov squeezed state gets g² more nearly right
+
+Bogoliubov 1947, Stoler 1971
+
 second order binomial expansion in order parameter and fluctuations
+Bogoliubov Hamiltonian
 Bogoliubov = squeezing transform
 linear dispersion long wavelength
 sound wave modes
@@ -71,10 +85,20 @@ Bogoliubov sound speed is √2
 quadratic dispersion short wavelength
 quasiparticles
 
-Bogoliubov Hamiltonian
-rotating squeezed orbitals
-oscillations
+cite prd-1-3217 and pra-13-2226 on squeezed states.
 
+
+# Stationary dynamics as a test
+
+want an independent test of the validity of these approximations
+
+expectation values in the ground state are stationary
+computed dynamics can test the approximations
+uniform density strongly constrained by energy
+Glauber second order coherence function
+	this is proportional to repulsion energy for contact potentials
+
+Different number states have evolving relative phase
 limit of tight confinement
 small extent
 	bogoliubov approximation doesn't have a consistent limit
@@ -83,12 +107,33 @@ quartic oscillator
 	amplitude decays
 	first and second order coherence are conserved
 
-intermediate regime
+Dynamics of a coherent state in the Bogoliubov approximation
+	rotating squeezed orbitals
+	oscillating numbers in non-condensate orbitals
 
+# Truncated Wigner dynamics
+
+Independent approximation
 truncated Wigner
 classical probability density
 good approximation with many bosons per field mode
 Monte-Carlo Gross Pitaevskii equation
+
+# Results
+
+XSPDE
+
+Occupations of noncondensate orbitals in TW dynamics, with Bogoliubov dispersion curve for comparison.  (See tplot.m for how to sharpen frequency peaks.)
+
+Table of second-order coherence plots.  Independent variables are Lieb-Liniger γ, condensate size in healing lengths, and coherent vs Bogoliubov initial conditions.  (Maybe talk about the "first order ground state" and "second order ground state".)
+
+Quadrature graphs to illustrate that no expansion around a coherent state is anything like stationary.  Tie this back to the Dalton issues: total particle number shifts the chemical potential and therefore the quantum phase.
+
+# Experimental possibilities
+
+Can set up a coherent state, then turn on repulsion
+
+# Conclusion
 
 TW quadratures compared to quartic oscillator
 
@@ -102,3 +147,9 @@ At γ = 0.1, g² recovers over time in both initial conditions.  This is wierd, 
 
 Conclusions
 be careful about deducing correlations from coherent states
+
+
+# Trimmings
+
+How do you project out a fixed total particle number from a Bogoliubov state?  I guess that, when a large trap has a fixed total particle number, each short section of it has a Bogoliubov superposition of non-condensate densities, just as it would have a coherent-state superposition in the noninteracting case.
+
