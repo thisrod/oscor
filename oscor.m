@@ -87,3 +87,42 @@ function o = ftit(a,~,r)
 	o = [(abs(a).^2 - 1/(2*r.dkv)).*(r.kx ~= 0); ...
 		r.kx.^2.*(abs(a).^2 - 1/(2*r.dkv))];
 end
+
+function o = bdens(~,in,kcut)
+	% density of bosons with wave number at most kcut in a Bogoliubov state
+	% kcut defaults to the Nyquist wave number of the grid
+	L = in.ranges(2);  R = in.points(2);
+	L = L*R/(R-1);
+	if nargin > 2
+		n = kcut*L/(2*pi);
+	else
+		n = R/2 - 1;
+ 	end
+	k = 2*pi/L*(1:n);
+	vv = (k+1./k)./(2*sqrt(k.^2+2)) - 1/2;
+	o = 1/sqrt(2*in.c.gamma) + 2*sum(vv)/L;
+ end
+
+function a = binit(~,r)
+	L = r.ranges(2);  R = r.points(2);
+	L = L*R/(R-1);  % undo circular grid adjustment
+	n = r.nspace;  ens = r.ensembles(1);
+	a = zeros(ens, n);
+	% the condensate mode k=0 is added later
+	for kk = 2*pi*(1:ceil(n/2-1))/L	% sin and cos modes for each wave number
+		uu = ((kk+1/kk)/sqrt(kk^2+2) + 1)/2;  vv = uu - 1;
+		uu = sqrt(uu);  vv = sqrt(vv);
+		z = [1 1i]*randn(2,2*ens)/2;  z = reshape(z,ens,2);
+		a = a + (z(:,1)*uu-conj(z(:,1))*vv)*sin(kk*r.xc{2});
+		a = a + (z(:,2)*uu-conj(z(:,2))*vv)*cos(kk*r.xc{2});
+	end
+	if mod(n,2) == 0	% even grids have a zizag mode
+		kk = 2*pi*n/2/L;
+		uu = ((kk+1/kk)/sqrt(kk^2+2) + 1)/2;  vv = uu - 1;
+		uu = sqrt(uu);  vv = sqrt(vv);
+		z = [1 1i]*randn(2,ens)/2;  z = reshape(z,ens,1);
+		a = a + (z(:,1)*uu-conj(z(:,1))*vv)*(-1).^(1:n);
+	end
+	a = sqrt(2/L)*a + (2*r.c.gamma)^(-1/4);
+	a = reshape(a, r.d.a);
+end % function init
