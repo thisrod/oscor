@@ -109,20 +109,22 @@ function a = binit(~,r)
 	n = r.nspace;  ens = r.ensembles(1);
 	a = zeros(ens, n);
 	% the condensate mode k=0 is added later
-	for kk = 2*pi*(1:ceil(n/2-1))/L	% sin and cos modes for each wave number
+	for k = 2*pi*(1:ceil(n/2-1))/L	% sin and cos modes for each wave number
+		kk = r.c.healing*k;
 		uu = ((kk+1/kk)/sqrt(kk^2+2) + 1)/2;  vv = uu - 1;
 		uu = sqrt(uu);  vv = sqrt(vv);
 		z = [1 1i]*randn(2,2*ens)/2;  z = reshape(z,ens,2);
-		a = a + (z(:,1)*uu-conj(z(:,1))*vv)*sin(kk*r.xc{2});
-		a = a + (z(:,2)*uu-conj(z(:,2))*vv)*cos(kk*r.xc{2});
+		a = a + (z(:,1)*uu-conj(z(:,1))*vv)*sin(k*r.xc{2});
+		a = a + (z(:,2)*uu-conj(z(:,2))*vv)*cos(k*r.xc{2});
 	end
 	if mod(n,2) == 0	% even grids have a zizag mode
-		kk = 2*pi*n/2/L;
+		k = 2*pi*n/2/L;  kk = r.c.healing*k;
 		uu = ((kk+1/kk)/sqrt(kk^2+2) + 1)/2;  vv = uu - 1;
 		uu = sqrt(uu);  vv = sqrt(vv);
 		z = [1 1i]*randn(2,ens)/2;  z = reshape(z,ens,1);
 		a = a + (z(:,1)*uu-conj(z(:,1))*vv)*(-1).^(1:n);
 	end
-	a = sqrt(2/L)*a + (2*r.c.gamma)^(-1/4);
+	a = sqrt(2/L)*a + 1;
+%	a = sqrt(2/L)*a + (2*r.c.gamma)^(-1/4);	% healing length units
 	a = reshape(a, r.d.a);
 end % function init
