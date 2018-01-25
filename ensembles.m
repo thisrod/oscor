@@ -1,0 +1,1 @@
+% This is a stub for Matlab to include when running on the desktop.  When running on the cluster, fire.m overwrites it with commands that configure Matlab to run with appropriate parallelism for whatever type of node is available.
