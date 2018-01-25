@@ -16,6 +16,8 @@ end
 
 if exist('bogoliubov')
 	bogoliubov = configure(bogoliubov);
+	% this gets it wrong, thesis g2 graphs were normalised
+	% by reading off the N/L graphs
 	bogoliubov.c.n = bdens(0, bogoliubov);
 	bogoliubov.initial = @binit;
 	bogoliubov.file = ['bog' bogoliubov.file];
@@ -122,7 +124,7 @@ function a = binit(~,r)
 		uu = ((kk+1/kk)/sqrt(kk^2+2) + 1)/2;  vv = uu - 1;
 		uu = sqrt(uu);  vv = sqrt(vv);
 		z = [1 1i]*randn(2,ens)/2;  z = reshape(z,ens,1);
-		a = a + (z(:,1)*uu-conj(z(:,1))*vv)*(-1).^(1:n);
+		a = a + (z(:,1)*uu-conj(z(:,1))*vv)*(-1).^(1:n)/sqrt(2);
 	end
 	a = sqrt(2/L)*a + 1;
 %	a = sqrt(2/L)*a + (2*r.c.gamma)^(-1/4);	% healing length units
