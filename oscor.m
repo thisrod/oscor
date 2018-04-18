@@ -1,4 +1,7 @@
 function oscor()
+
+warning 'Aliasing test version'
+
 % 1D coherence oscillations from a coherent and bogoliubov initial state
 
 parameters, ensembles
@@ -111,7 +114,7 @@ function a = binit(~,r)
 	n = r.nspace;  ens = r.ensembles(1);
 	a = zeros(ens, n);
 	% the condensate mode k=0 is added later
-	for k = 2*pi*(1:ceil(n/2-1))/L	% sin and cos modes for each wave number
+	for k = 2*pi*(1:ceil(n/4-1))/L	% sin and cos modes for each wave number
 		kk = r.c.healing*k;
 		uu = ((kk+1/kk)/sqrt(kk^2+2) + 1)/2;  vv = uu - 1;
 		uu = sqrt(uu);  vv = sqrt(vv);
@@ -119,7 +122,7 @@ function a = binit(~,r)
 		a = a + (z(:,1)*uu-conj(z(:,1))*vv)*sin(k*r.xc{2});
 		a = a + (z(:,2)*uu-conj(z(:,2))*vv)*cos(k*r.xc{2});
 	end
-	if mod(n,2) == 0	% even grids have a zizag mode
+	if false	% even grids have a zizag mode
 		k = 2*pi*n/2/L;  kk = r.c.healing*k;
 		uu = ((kk+1/kk)/sqrt(kk^2+2) + 1)/2;  vv = uu - 1;
 		uu = sqrt(uu);  vv = sqrt(vv);
