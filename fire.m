@@ -112,6 +112,6 @@ fclose(runfile);
 system(sprintf('scp -q %s %s@g2.hpc.swin.edu.au:%s/runjob', ...
 	runfilename, gstar_login, letter));
 
-system(sprintf('%s /opt/torque/bin/qsub %s/runjob', ssh_cmd, letter));
+system(sprintf('%s "cd %s; /opt/torque/bin/qsub runjob" ', ssh_cmd, letter));
 
 end
